@@ -1,0 +1,55 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Anime {
+  id_anime    String    @id
+  judul_anime String
+  link_anime  String    @unique
+  origin      String
+  sts         Int
+  src         Int
+  img         String
+  studio      String?
+  season      String?
+  tags        String?
+  ket_sts     Int
+  display     Int
+  gambar      String
+  Episode     Episode[]
+}
+
+model Episode {
+  id_episode String @id
+  id_anime   String
+  link       String @unique
+  eps        String
+  judul      String
+  date       String
+  id_eps     Int
+  vid        String
+  Anime      Anime  @relation(fields: [id_anime], references: [id_anime])
+}
+
+model Meta {
+  id        Int      @id @default(autoincrement())
+  hash      String   @unique
+  command   String
+  status    Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Riwayat {
+  id        Int      @id @default(autoincrement())
+  link      String
+  title     String
+  desc      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
