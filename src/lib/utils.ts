@@ -22,6 +22,17 @@ export const formatDateToLocal = (dateStr: string, locale: string = "id-ID"): st
   return formatter.format(date);
 };
 
+export const getNowforDB = () => {
+  const date = new Date();
+  const y = date.getFullYear();
+  const m = String(date.getMonth() + 1).padStart(2, "0");
+  const d = String(date.getDate()).padStart(2, "0");
+  const h = String(date.getHours()).padStart(2, "0");
+  const i = String(date.getMinutes()).padStart(2, "0");
+  const s = String(date.getSeconds()).padStart(2, "0");
+  return `${y}-${m}-${d} ${h}:${i}:${s}`;
+};
+
 export type paginationGenerated = Array<number | string>;
 
 export const generatePagination = (currentPage: number, totalPages: number): paginationGenerated => {
