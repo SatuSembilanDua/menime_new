@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { APP_DESCRIPTION, APP_NAME, SERVER_URL } from "@/lib/constants";
 import Riwayat from "@/hooks/riwayat";
+import { Suspense } from "react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -55,7 +56,9 @@ export default function RootLayout({
     >
       <body>
         {children}
-        <Riwayat />
+        <Suspense>
+          <Riwayat />
+        </Suspense>
       </body>
     </html>
   );
